@@ -62,6 +62,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [initializationError, setInitializationError] = useState("");
   const [notificationCount, setNotificationCount] = useState(0);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     initialize().catch((error) => {
@@ -197,13 +198,28 @@ export default function Home() {
   }
 
   return (
-    <div className="app-shell">
-      <aside className="sidebar">
-        <div className="brand side-brand">
-          <span className="brand-icon">h</span>
-          <b>
-            hcm<span>lite</span>
-          </b>
+    <div className={`app-shell ${sidebarOpen ? "sidebar-active" : ""}`}>
+      <div
+        className={`sidebar-backdrop ${sidebarOpen ? "open" : ""}`}
+        onClick={() => setSidebarOpen(false)}
+        aria-hidden="true"
+      />
+      <aside className={`sidebar ${sidebarOpen ? "open" : ""}`}>
+        <div className="sidebar-header-row">
+          <div className="brand side-brand">
+            <span className="brand-icon">h</span>
+            <b>
+              hcm<span>lite</span>
+            </b>
+          </div>
+          <button
+            type="button"
+            className="sidebar-close-btn"
+            onClick={() => setSidebarOpen(false)}
+            aria-label="Close menu"
+          >
+            ×
+          </button>
         </div>
         <div className="workspace">
           <div className="workspace-symbol">
@@ -220,7 +236,10 @@ export default function Home() {
           {menus.map((item, index) => (
             <button
               key={item}
-              onClick={() => changePage(item)}
+              onClick={() => {
+                changePage(item);
+                setSidebarOpen(false);
+              }}
               className={`nav-item ${page === item ? "active" : ""}`}
               aria-current={page === item ? "page" : undefined}
             >
@@ -242,7 +261,12 @@ export default function Home() {
             <p>
               Ask the assistant about people, policies, and your available data.
             </p>
-            <button onClick={() => changePage("Assistant")}>
+            <button
+              onClick={() => {
+                changePage("Assistant");
+                setSidebarOpen(false);
+              }}
+            >
               Ask the assistant <span>↗</span>
             </button>
           </div>
@@ -250,9 +274,10 @@ export default function Home() {
             <button
               type="button"
               className={`profile ${page === "Profile" || page === "My profile" ? "active" : ""}`}
-              onClick={() =>
-                changePage(user.role === "employee" ? "My profile" : "Profile")
-              }
+              onClick={() => {
+                changePage(user.role === "employee" ? "My profile" : "Profile");
+                setSidebarOpen(false);
+              }}
               title="View profile"
               aria-label="View profile"
             >
@@ -265,7 +290,10 @@ export default function Home() {
             <button
               type="button"
               className={`sidebar-security-btn ${page === "Security" ? "active" : ""}`}
-              onClick={() => changePage("Security")}
+              onClick={() => {
+                changePage("Security");
+                setSidebarOpen(false);
+              }}
               title="Security & Password"
               aria-label="Security & Password"
             >
@@ -290,8 +318,32 @@ export default function Home() {
 
       <main className="main">
         <header className="topbar">
-          <div className="crumb">
-            Workspace <span>/</span> <b>{page}</b>
+          <div className="topbar-left">
+            <button
+              type="button"
+              className="mobile-menu-btn"
+              onClick={() => setSidebarOpen(true)}
+              aria-label="Open menu"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+              </svg>
+            </button>
+            <div className="crumb">
+              Workspace <span>/</span> <b>{page}</b>
+            </div>
           </div>
           <div className="top-actions">
             <button
