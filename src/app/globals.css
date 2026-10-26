@@ -2188,7 +2188,12 @@ td small {
   }
   .sidebar {
     position: fixed;
-    inset: 0 auto 0 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: auto;
+    height: 100dvh;
+    -webkit-overflow-scrolling: touch;
     width: min(86vw, 300px);
     height: 100vh;
     z-index: 100;
@@ -2201,10 +2206,19 @@ td small {
     transform: translateX(0);
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
   }
+  .sidebar nav {
+    max-height: none !important;
+    overflow-y: visible !important;
+  }
   .sidebar-backdrop {
     display: block;
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
     background: rgba(15, 23, 42, 0.6);
     backdrop-filter: blur(3px);
     z-index: 99;
@@ -4884,216 +4898,334 @@ html[data-theme="dark"] .security-form label {
   }
 }
 
-@media (max-width: 760px) {
-  .content {
-    padding: 16px 14px 32px;
+@media (max-width: 900px) {
+  .auth-page {
+    grid-template-columns: 1fr !important;
   }
-  .topbar {
-    padding: 0 14px;
-    height: 56px;
+  .auth-art {
+    display: none !important;
   }
-  .toolbar {
+  .auth-side {
+    min-height: 100vh;
+    padding: 30px 20px;
+    display: flex;
     flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-  }
-  .searchbox {
-    width: 100%;
-    min-width: 0;
-  }
-  .filter-row {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-  }
-  .filter-row label,
-  .filter-row .compact-filter {
-    width: 100%;
-  }
-  .form-grid {
-    grid-template-columns: 1fr;
-  }
-  .settings-fields {
-    grid-template-columns: 1fr;
-  }
-  .employee-profile-grid {
-    grid-template-columns: 1fr;
-  }
-  .employee-360-grid {
-    grid-template-columns: 1fr;
-  }
-  .modal {
-    width: 95vw;
-    max-width: 95vw;
-    max-height: 92vh;
-    padding: 20px 16px;
-  }
-  .modal.wide {
-    width: 95vw;
-  }
-  .modal-actions {
-    flex-direction: column-reverse;
-    gap: 8px;
-  }
-  .modal-actions .button {
-    width: 100%;
-    min-height: 44px;
     justify-content: center;
-  }
-  .assistant-panel {
-    padding: 16px 14px;
-  }
-  .chat-row {
-    max-width: 96%;
-  }
-  .panel-heading {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .panel-heading > div:last-child {
     width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
-  .date-filter {
-    width: 100%;
-    justify-content: space-between;
+  .setup-grid {
+    grid-template-columns: 1fr !important;
   }
-  .date-filter input {
-    flex: 1;
-    min-width: 0;
-  }
-  .admin-finalize-banner {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
-  }
-  .finalize-banner-btn {
-    width: 100%;
-    justify-content: center;
-  }
-  .profile-security-banner {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-  }
-  .profile-security-banner .button {
-    width: 100%;
-    justify-content: center;
-  }
-  .announcement-head {
-    width: 100%;
-  }
-  .announcement-head .button {
-    width: 100%;
-    justify-content: center;
-  }
-  .assistant-suggestions-bar {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-  .suggestions-scroll {
-    width: 100%;
-    -webkit-overflow-scrolling: touch;
-  }
-  .org-tab-strip {
-    -webkit-overflow-scrolling: touch;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-  }
-  .welcome-orb {
-    opacity: 0.22;
-    right: -40px;
+  .org-form-row {
+    grid-template-columns: 1fr !important;
   }
 }
 
-/* Compact Mobile Screens (< 540px: iPhone 12/13/14, Pixel, Galaxy) */
-@media (max-width: 540px) {
-  .chat-composer {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
+@media (max-width: 760px) {
+  .content {
+    padding: 16px 12px 32px;
   }
-  .chat-composer textarea {
-    width: 100%;
-    min-height: 60px;
-    height: auto;
+  .topbar {
+    padding: 0 12px;
+    height: 54px;
   }
-  .chat-composer button {
-    width: 100%;
-    height: 44px;
-    justify-content: center;
+  .section-title {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+  .section-title .filter-row {
+    width: 100% !important;
+  }
+  .filter-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+  .filter-row label,
+  .filter-row .compact-filter {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+  .filter-row .compact-filter input {
+    flex: 1 !important;
+    min-width: 0 !important;
+  }
+  .filter-row select,
+  .filter-row .select-button,
+  .filter-row button,
+  .filter-row .button {
+    width: 100% !important;
+    min-height: 40px !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+  .toolbar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+  .searchbox {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+  .searchbox input {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  .toolbar .select-button,
+  .toolbar .button,
+  .toolbar .file-button {
+    width: 100% !important;
+    min-height: 42px !important;
+    justify-content: center !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+  }
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+  .welcome-orb {
+    display: none !important;
+  }
+  .welcome-panel {
+    min-height: auto !important;
+    padding: 20px 16px !important;
+  }
+  .date-panel {
+    min-height: auto !important;
+    padding: 18px 16px !important;
+  }
+  .date-stats {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .form-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .settings-fields {
+    grid-template-columns: 1fr !important;
+  }
+  .employee-profile-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .employee-360-grid {
+    grid-template-columns: 1fr !important;
   }
   .modal-backdrop {
-    padding: 10px;
+    padding: 10px 8px !important;
+    align-items: center !important;
   }
   .modal {
     width: 100% !important;
     max-width: 100% !important;
-    padding: 16px 14px;
-    border-radius: 12px;
+    max-height: 92dvh !important;
+    padding: 18px 14px !important;
+    border-radius: 12px !important;
   }
   .modal.wide {
     width: 100% !important;
+    max-width: 100% !important;
   }
-  .finalize-stats-grid {
-    grid-template-columns: 1fr;
-    gap: 8px;
+  .modal-actions {
+    flex-direction: column-reverse !important;
+    gap: 8px !important;
   }
-  .auth-side {
-    padding: 24px 16px;
+  .modal-actions .button {
+    width: 100% !important;
+    min-height: 44px !important;
+    justify-content: center !important;
   }
+  .pagination {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 10px !important;
+    text-align: center !important;
+  }
+  .pagination > div {
+    display: flex !important;
+    gap: 8px !important;
+    width: 100% !important;
+    justify-content: center !important;
+  }
+  .pagination button {
+    flex: 1 !important;
+    min-height: 40px !important;
+  }
+  .assistant-panel {
+    padding: 16px 12px !important;
+  }
+  .chat-row {
+    max-width: 96% !important;
+  }
+  .chat-messages {
+    max-height: calc(100dvh - 340px) !important;
+    min-height: 240px !important;
+  }
+  .panel-heading {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+  .panel-heading .button,
+  .panel-heading .inline-actions,
+  .panel-heading .payroll-run-controls {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+  .date-filter {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+  }
+  .date-filter input {
+    flex: 1 !important;
+    min-width: 0 !important;
+  }
+  .admin-finalize-banner {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+  .finalize-banner-btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+  .profile-security-banner {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+  }
+  .profile-security-banner .button {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+  .announcement-head {
+    width: 100% !important;
+  }
+  .announcement-head .button {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+  .assistant-suggestions-bar {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
+  .suggestions-scroll {
+    width: 100% !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .org-tab-strip {
+    -webkit-overflow-scrolling: touch !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+  }
+  .table-wrap {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .table-wrap table {
+    min-width: 540px !important;
+  }
+  .panel,
+  .full-panel {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* Phones & Compact Screens (< 600px: iPhone, Galaxy, Pixel) */
+@media (max-width: 600px) {
   .auth-role-cards {
-    gap: 6px;
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
   }
   .auth-role-card {
-    padding: 9px 6px;
+    flex-direction: row !important;
+    align-items: center !important;
+    padding: 11px 14px !important;
+    gap: 12px !important;
   }
-  .role-card-icon {
-    width: 28px;
-    height: 28px;
+  .role-card-top {
+    margin-bottom: 0 !important;
+    gap: 10px !important;
+  }
+  .role-card-info {
+    flex: 1 !important;
   }
   .role-card-title {
-    font-size: 11.5px;
+    font-size: 13px !important;
   }
   .role-card-badge {
-    font-size: 9px;
+    font-size: 10px !important;
+    margin-top: 2px !important;
+  }
+  .role-card-indicator {
+    margin-left: auto !important;
+    order: 3 !important;
+  }
+  .auth-grid-2 {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+  .chat-composer {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+  }
+  .chat-composer textarea {
+    width: 100% !important;
+    min-height: 60px !important;
+    height: auto !important;
+  }
+  .chat-composer button {
+    width: 100% !important;
+    height: 44px !important;
+    justify-content: center !important;
+  }
+  .finalize-stats-grid {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+  .auth-side {
+    padding: 24px 14px !important;
   }
   .notification-item {
-    flex-wrap: wrap;
-    gap: 10px;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
   }
   .notification-item .text-link {
-    margin-left: auto;
+    margin-left: auto !important;
   }
 }
 
 /* Ultra-Compact Screens (< 380px: iPhone SE, Galaxy Fold outer, small Androids) */
 @media (max-width: 380px) {
   .date-stats b {
-    font-size: 16px;
+    font-size: 16px !important;
   }
   .date-stats > div:nth-child(2),
   .date-stats > div:last-child {
-    padding-left: 8px;
+    padding-left: 8px !important;
   }
   .crumb {
-    max-width: 100px;
+    max-width: 100px !important;
   }
   .page-heading h1 {
-    font-size: 18px;
-  }
-  .auth-role-cards {
-    grid-template-columns: 1fr;
-  }
-  .auth-role-card {
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-  }
-  .role-card-top {
-    margin-bottom: 0;
-    gap: 8px;
+    font-size: 18px !important;
   }
 }
 
